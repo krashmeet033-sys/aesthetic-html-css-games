@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ========== START SCREEN ========== -->
+  <section class="start-screen">
+    <h1>Welcome to Tic Tac Toe 🎮</h1>
+    <p>Click below to start the game</p>
+    <button id="startBtn">Start Game</button>
+  </section>
+
+
+  <!-- ========== GAME SCREEN ========== -->
+  <section class="game-screen hidden">
+
+    <header>
+      <h2>Player Turn: <span id="turn">X</span></h2>
+
+      <!-- Scoreboard -->
+      <div class="scoreboard">
+        <p>X Score: <span id="xScore">0</span></p>
+        <p>O Score: <span id="oScore">0</span></p>
+      </div>
+    </header>
+
+    <!-- Game Board -->
+    <main class="board">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </main>
+
+    <button id="restart">Restart Game</button>
+
+  </section>
+
+
+  <!-- ========== GAME OVER SCREEN ========== -->
+  <section class="game-over hidden">
+    <h2 id="winner"></h2>
+    <button id="playAgain">Play Again</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

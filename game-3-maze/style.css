@@ -1,0 +1,78 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#1d2b64,#f8cdda);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+.hidden{display:none;}
+
+.start,.win{
+  text-align:center;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Maze */
+.maze{
+  position:relative;
+  width:320px;
+  height:320px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Player */
+#player{
+  position:absolute;
+  width:25px;
+  height:25px;
+  background:#ff4d4d;
+  border-radius:50%;
+  top:10px;
+  left:10px;
+  transition:.15s;
+}
+
+/* Goal */
+.goal{
+  position:absolute;
+  width:35px;
+  height:35px;
+  background:#00cc66;
+  bottom:10px;
+  right:10px;
+  border-radius:6px;
+}
+
+/* Walls */
+.wall{
+  position:absolute;
+  background:#222;
+}
+
+.w1{width:220px;height:10px;top:90px;left:0;}
+.w2{width:10px;height:170px;top:90px;left:210px;}
+.w3{width:200px;height:10px;top:230px;left:120px;}
+.w4{width:10px;height:160px;top:40px;left:120px;}

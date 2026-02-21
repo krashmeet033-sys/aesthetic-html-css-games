@@ -1,0 +1,87 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins, sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#1d2671,#c33764);
+  color:white;
+}
+
+.container{
+  width:95%;
+  max-width:700px;
+  text-align:center;
+}
+
+.screen{
+  display:none;
+}
+
+.active{
+  display:block;
+}
+
+/* button */
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff512f,#dd2476);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:20px;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* answers */
+.answers{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:20px;
+}
+
+.answer{
+  padding:12px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.15);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.answer:hover{
+  background:rgba(255,255,255,0.3);
+  transform:translateX(5px);
+}
+
+/* progress bar */
+.progress{
+  height:10px;
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:15px;
+}
+
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(to right,#00f260,#0575e6);
+  transition:0.4s;
+}
+
+@media(max-width:600px){
+  h1{font-size:24px;}
+}

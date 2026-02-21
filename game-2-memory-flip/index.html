@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aesthetic Memory Game</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="container">
+
+  <!-- START SCREEN -->
+  <div id="startScreen" class="screen active">
+    <h1>🧠 Memory Flip Game</h1>
+    <p>Match all the cards to win.</p>
+    <button id="startBtn">Start Game</button>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="gameScreen" class="screen">
+    <h1>Find the Pairs ✨</h1>
+
+    <div class="top">
+      <div>Moves: <span id="moves">0</span></div>
+      <div>Matches: <span id="matches">0</span></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <!-- END SCREEN -->
+  <div id="endScreen" class="screen">
+    <h1>🎉 You Won!</h1>
+    <p>Total Moves: <span id="finalMoves"></span></p>
+    <button id="restartBtn">Play Again</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

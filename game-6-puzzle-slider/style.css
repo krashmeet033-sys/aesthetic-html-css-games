@@ -1,0 +1,38 @@
+css
+body{
+  font-family:Arial;
+  background:linear-gradient(120deg,#0f2027,#2c5364);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.container{text-align:center}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,80px);
+  gap:8px;
+  margin-top:20px;
+}
+
+.tile{
+  width:80px;
+  height:80px;
+  background:white;
+  color:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.empty{background:transparent;border:2px dashed white}
+
+
+

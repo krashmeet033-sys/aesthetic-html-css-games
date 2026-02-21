@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maze Escape</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- START -->
+  <section class="start">
+    <h1>Maze Escape 🧭</h1>
+    <p>Use arrow keys to reach the green goal</p>
+    <button id="startBtn">Start Game</button>
+  </section>
+
+  <!-- GAME -->
+  <section class="game hidden">
+
+    <div class="maze">
+      <div id="player"></div>
+      <div class="goal"></div>
+
+      <!-- Walls -->
+      <div class="wall w1"></div>
+      <div class="wall w2"></div>
+      <div class="wall w3"></div>
+      <div class="wall w4"></div>
+    </div>
+
+    <button id="restart">Restart</button>
+  </section>
+
+  <!-- WIN -->
+  <section class="win hidden">
+    <h2>🎉 You Escaped!</h2>
+    <button id="playAgain">Play Again</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

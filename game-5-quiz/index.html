@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Quiz Game</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="container">
+
+  <!-- START SCREEN -->
+  <div id="startScreen" class="screen active">
+    <h1>🎯 Quiz Challenge</h1>
+    <p>Test your knowledge and get your score.</p>
+    <button id="startBtn">Start Quiz</button>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div id="quizScreen" class="screen">
+    <h2 id="question">Question here</h2>
+
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+
+    <div id="answers" class="answers"></div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div id="resultScreen" class="screen">
+    <h1>🎉 Quiz Finished</h1>
+    <p>Your Score: <span id="score"></span></p>
+    <button id="restartBtn">Play Again</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

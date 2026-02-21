@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aesthetic Whack-a-Mole</title>
+
+  <!-- Google font for aesthetic look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif}
+
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(120deg,#667eea,#764ba2);
+      color:white;
+    }
+
+    .container{
+      width:90%;
+      max-width:700px;
+      text-align:center;
+    }
+
+    h1{font-weight:700;margin-bottom:10px}
+
+    /* Screens */
+    .screen{display:none}
+    .active{display:block}
+
+    button{
+      padding:12px 22px;
+      border:none;
+      border-radius:25px;
+      background:#ffb347;
+      color:#222;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      margin-top:15px;
+    }
+
+    button:hover{
+      transform:scale(1.08);
+      background:#ffd27f;
+    }
+
+    /* Game area */
+    .top{
+      display:flex;
+      justify-content:space-between;
+      margin:15px 0;
+      font-size:18px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
+    }
+
+    .hole{
+      height:110px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.2);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter:blur(8px);
+    }
+
+    .mole{
+      position:absolute;
+      bottom:-120px;
+      left:50%;
+      transform:translateX(-50%);
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background:linear-gradient(#ff8a00,#e52e71);
+      transition:0.3s;
+      cursor:pointer;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:26px;
+    }
+
+    .show{bottom:10px}
+
+    .progress{
+      height:12px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.3);
+      overflow:hidden;
+      margin:10px 0;
+    }
+
+    .bar{
+      height:100%;
+      width:100%;
+      background:linear-gradient(to right,#00f260,#0575e6);
+      transition:width 1s linear;
+    }
+
+    /* responsive */
+    @media(max-width:600px){
+      .hole{height:90px}
+      .mole{width:55px;height:55px}
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- START -->
+  <div id="start" class="screen active">
+    <h1>🎯 Whack-a-Mole</h1>
+    <p>Hit the mole as fast as you can. Score 15 to win!</p>
+    <button id="startBtn">Start Game</button>
+  </div>
+
+  <!-- GAME -->
+  <div id="game" class="screen">
+    <h1>Game On 🔥</h1>
+
+    <div class="top">
+      <div>Score: <span id="score">0</span></div>
+      <div>Time: <span id="time">30</span>s</div>
+    </div>
+
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <!-- END -->
+  <div id="end" class="screen">
+    <h1 id="result">Game Over</h1>
+    <p>Your score: <span id="finalScore"></span></p>
+    <button id="playAgain">Play Again</button>
+  </div>
+
+</div>
+
+<script>
+
+/* ===== Human friendly JS ===== */
+
+const startBtn = document.getElementById("startBtn");
+const playAgain = document.getElementById("playAgain");
+
+const startScreen = document.getElementById("start");
+const gameScreen = document.getElementById("game");
+const endScreen = document.getElementById("end");
+
+const grid = document.getElementById("grid");
+const scoreText = document.getElementById("score");
+const timeText = document.getElementById("time");
+const finalScore = document.getElementById("finalScore");
+const result = document.getElementById("result");
+const bar = document.getElementById("bar");
+
+let score = 0;
+let time = 30;
+let timer;
+let moleTimer;
+let gameRunning = false;
+
+/* create holes only once */
+for (let i = 0; i < 9; i++) {
+  const hole = document.createElement("div");
+  hole.classList.add("hole");
+
+  const mole = document.createElement("div");
+  mole.classList.add("mole");
+  mole.innerHTML = "🐹";
+
+  mole.addEventListener("click", () => {
+    if (!gameRunning) return;
+    score++;
+    scoreText.textContent = score;
+    mole.classList.remove("show");
+
+    if (score >= 15) finishGame(true);
+  });
+
+  hole.appendChild(mole);
+  grid.appendChild(hole);
+}
+
+/* show screens */
+function showScreen(screen){
+  startScreen.classList.remove("active");
+  gameScreen.classList.remove("active");
+  endScreen.classList.remove("active");
+  screen.classList.add("active");
+}
+
+/* start game */
+function startGame(){
+  score = 0;
+  time = 30;
+  gameRunning = true;
+
+  scoreText.textContent = score;
+  timeText.textContent = time;
+  bar.style.width = "100%";
+
+  showScreen(gameScreen);
+
+  startMoles();
+
+  timer = setInterval(() => {
+    time--;
+    timeText.textContent = time;
+    bar.style.width = (time / 30) * 100 + "%";
+
+    if (time <= 0) finishGame(false);
+  }, 1000);
+}
+
+/* mole random movement */
+function startMoles(){
+  moleTimer = setInterval(() => {
+    if(!gameRunning) return;
+
+    const moles = document.querySelectorAll(".mole");
+    moles.forEach(m => m.classList.remove("show"));
+
+    const random = Math.floor(Math.random() * moles.length);
+    moles[random].classList.add("show");
+
+  }, 700);
+}
+
+/* finish game */
+function finishGame(win){
+  gameRunning = false;
+
+  clearInterval(timer);
+  clearInterval(moleTimer);
+
+  document.querySelectorAll(".mole").forEach(m => m.classList.remove("show"));
+
+  finalScore.textContent = score;
+
+  if(win) result.textContent = "🎉 You Win!";
+  else result.textContent = "⏰ Time Over";
+
+  showScreen(endScreen);
+}
+
+/* events */
+startBtn.onclick = startGame;
+playAgain.onclick = startGame;
+
+</script>
+
+</body>
+</html>
+
